@@ -57,6 +57,13 @@ float4 PS(VOut pIn) : SV_TARGET
      d = d * d;
 
      float4 light = float4(d * c_lightColor, 1.0f);
+    
+    if (light.x < 0.25)
+        light = float4(0.0, 0.0, 0.0, 1.0);
+    else if (light.x < 0.75)
+        light = float4(0.5, 0.5, 0.5, 1.0);
+    else
+        light = float4(1.0, 1.0, 1.0, 1.0);
 
-     return diffuseTex * light;
+    return diffuseTex * light;
 }
